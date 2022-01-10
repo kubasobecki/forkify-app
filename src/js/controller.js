@@ -1,5 +1,7 @@
 // const { func } = require('assert-plus');
 import icons from 'url:../img/icons.svg';
+import 'core-js/stable'; // polyfilling everything else
+import 'regenerator-runtime/runtime'; // polyfilling async-await
 
 const recipeContainer = document.querySelector('.recipe');
 
