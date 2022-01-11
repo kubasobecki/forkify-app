@@ -30,28 +30,6 @@ class RecipeView {
   }
 
   #generateMarkup() {
-    const ingredientsHTML = this.#data.ingredients.reduce((html, ing) => {
-      const quantity = ing?.quantity
-        ? `<div class="recipe__quantity">${new Fraction(
-            ing.quantity
-          ).toString()}</div>`
-        : '';
-      const unit = ing?.unit
-        ? `<span class="recipe__unit">${ing.unit}</span>`
-        : '';
-      return (html += `
-        <li class="recipe__ingredient">
-          <svg class="recipe__icon">
-            <use href="${icons}#icon-check"></use>
-          </svg>
-          ${quantity}
-          <div class="recipe__description">
-            ${unit}
-            ${ing.description}
-          </div>
-        </li>`);
-    }, '');
-
     return `
       <figure class="recipe__fig">
       <img src="${this.#data.image}" alt="${
@@ -120,9 +98,7 @@ class RecipeView {
               pasta
             </div>
           </li>
-
-          ${ingredientsHTML}
-
+          ${this.#generateMarkupIngredient()}
       </ul>
       </div>
 
@@ -147,6 +123,32 @@ class RecipeView {
       </a>
       </div>
     `;
+  }
+
+  #generateMarkupIngredient() {
+    return this.#data.ingredients.reduce((html, ing) => {
+      const quantity = ing?.quantity
+        ? `<div class="recipe__quantity">${new Fraction(
+            ing.quantity
+          ).toString()}</div>`
+        : '';
+
+      const unit = ing?.unit
+        ? `<span class="recipe__unit">${ing.unit}</span>`
+        : '';
+
+      return (html += `
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${icons}#icon-check"></use>
+        </svg>
+        ${quantity}
+        <div class="recipe__description">
+          ${unit}
+          ${ing.description}
+        </div>
+      </li>`);
+    }, '');
   }
 }
 
