@@ -1,4 +1,5 @@
 import icons from 'url:../../img/icons.svg';
+import { Fraction } from 'fractional';
 
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
@@ -31,7 +32,9 @@ class RecipeView {
   #generateMarkup() {
     const ingredientsHTML = this.#data.ingredients.reduce((html, ing) => {
       const quantity = ing?.quantity
-        ? `<div class="recipe__quantity">${ing.quantity}</div>`
+        ? `<div class="recipe__quantity">${new Fraction(
+            ing.quantity
+          ).toString()}</div>`
         : '';
       const unit = ing?.unit
         ? `<span class="recipe__unit">${ing.unit}</span>`
