@@ -138,3 +138,4 @@ const init = function () {
 };
 
 init();
+console.log('Welcome to new app!');
